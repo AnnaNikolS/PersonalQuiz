@@ -67,7 +67,7 @@ final class QuestionsViewController: UIViewController {
     
     deinit {
         print("\(type(of: self)) has been deallocated")
-    } 
+    } 
 }
 
 //MARK: - Private Methods
