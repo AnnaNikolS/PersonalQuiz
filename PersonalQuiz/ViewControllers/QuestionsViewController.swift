@@ -8,6 +8,7 @@
 import UIKit
 
 final class QuestionsViewController: UIViewController {
+    
     //MARK: IB Outlets
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var questionProgressView: UIProgressView!
@@ -39,7 +40,7 @@ final class QuestionsViewController: UIViewController {
         let answerCount = Float(currentAnswers.count - 1)
         rangedSlider.maximumValue = answerCount
         rangedSlider.value = answerCount / 2
-
+        
     }
     
     //MARK: - IB Actions
@@ -65,9 +66,12 @@ final class QuestionsViewController: UIViewController {
         nextQuestion()
     }
     
-    deinit {
-        print("\(type(of: self)) has been deallocated")
-    } 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let resultVC = segue.destination as? ResultViewController {
+            resultVC.answers = answersChosen
+        } else { return }
+    }
+    
 }
 
 //MARK: - Private Methods
@@ -146,7 +150,6 @@ private extension QuestionsViewController {
             updateUI()
             return
         }
-        
         performSegue(withIdentifier: "showResult", sender: nil)
     }
 }
